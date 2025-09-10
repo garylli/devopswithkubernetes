@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "name": "pingpong",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.ts",
+  "scripts": {
+    "start": "node ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.7.0",
+  "devDependencies": {
+    "@types/express": "^5.0.3"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

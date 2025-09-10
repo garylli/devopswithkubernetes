@@ -4,10 +4,20 @@ metadata:
   name: log-output-ing
   labels:
     app.kubernetes.io/name: log-output-ing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-    - http:
+    - host:
+      http:
         paths:
+          - pathType: Prefix
+            path: "/pingpong"
+            backend:
+              service:
+                name: pingpong-svc
+                port:
+                  name: pingpong-port
           - pathType: Prefix
             path: "/"
             backend:

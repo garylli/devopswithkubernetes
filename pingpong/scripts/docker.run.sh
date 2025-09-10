@@ -1,0 +1,1 @@
+docker run --rm -it --name pingpong -p 3000:3000 pingpong
