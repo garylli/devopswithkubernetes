@@ -1,0 +1,1 @@
+docker run --rm -dit --name theprojectdebug the_project 
