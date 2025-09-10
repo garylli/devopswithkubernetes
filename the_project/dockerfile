@@ -4,6 +4,7 @@ COPY package.json /srv/
 RUN npm install -y
 
 FROM node:alpine AS app
+ENV PORT=3000
 WORKDIR /srv
 COPY --from=base /srv/node_modules ./node_modules
 COPY --from=base /srv/package.json ./package.json
