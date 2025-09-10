@@ -4,9 +4,18 @@ import crypto from "crypto";
 
 const app = Express();
 
+function timestampMessage(message) {
+  const timestamp = new Date(Date.now());
+
+  const timestampedMessage = `${timestamp.toISOString()} ${message}`;
+
+  return timestampedMessage;
+}
+
+const randomNum = generateCryptoRandomString();
+
 function onStartup() {
-  const randomNum = generateCryptoRandomString();
-  const interval = outputAtInterval(randomNum, 5);
+  const interval = outputTimestampedMessageAtInterval(randomNum, 5);
 }
 
 function generateCryptoRandomString() {
@@ -15,18 +24,19 @@ function generateCryptoRandomString() {
   return hexString;
 }
 
-function outputAtInterval(output, intervalInSeconds) {
+function outputTimestampedMessageAtInterval(message, intervalInSeconds) {
   const MILLISECONDS_IN_A_SECOND = 1000;
-  const timestamp = new Date(Date.now());
-
-  const MESSAGE = `${timestamp.toISOString()} ${output}`;
-
   const interval = setInterval(
-    () => console.log(MESSAGE),
+    () => console.log(timestampMessage(message)),
     intervalInSeconds * MILLISECONDS_IN_A_SECOND
   );
   return interval;
 }
+
+app.get("/current", (req, res) => {
+  const message = timestampMessage(randomNum);
+  res.send(message);
+});
 
 app.get("/health-check", (req, res, next) => {
   res.send("Hello world!");
