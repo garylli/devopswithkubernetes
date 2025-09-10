@@ -1,10 +1,15 @@
 import express from "express";
 import http from "http";
+import { config } from "dotenv";
+config();
 
 const app = express();
 
-const RANDOM_AVAILABLE_PORT = 0;
-const PORT = RANDOM_AVAILABLE_PORT;
+if (!process.env.PORT) {
+  throw Error("No port found in .env");
+}
+
+const PORT = process.env.PORT;
 
 app.get("/", (req, res) => {
   res.send("<div>Some basic HTML</div>");
